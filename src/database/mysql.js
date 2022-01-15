@@ -8,4 +8,22 @@ var pool = mysql.createPool({
     "port": process.env.MYSQL_PORT
 })
 
+// Create urls table if necessary
+pool.getConnection(((error, conn) => {
+    if (error) {
+        return res.status(500).send({ error: error });
+    }
+
+    conn.query(`
+        CREATE TABLE IF NOT EXISTS urls(
+            id int primary key auto_increment,
+            url varchar(255) not null
+        )
+    `, (err, results, fields) => {
+        if (err) {
+            console.log(err.message);
+        }
+    })
+}))
+
 exports.pool = pool;
