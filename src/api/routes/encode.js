@@ -21,14 +21,14 @@ router.post('/', (req, res) => {
             (error, result, fields) => {
                 conn.release();
 
-                // Encode url based on insertion id
-                const encoded = `https://short.link/${hashids.encode(result.insertId)}`;
-
                 if (error) {
                     return res.status(500).send({ error: error });
                 }
 
-                res.status(201).send({
+                // Encode url based on insertion id
+                const encoded = `https://short.link/${hashids.encode(result.insertId)}`;
+
+                return res.status(201).send({
                     message: "Link successfully shortened!",
                     url: encoded
                 });

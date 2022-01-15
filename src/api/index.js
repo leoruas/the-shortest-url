@@ -9,9 +9,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Get environment variables
 require("dotenv").config();
 
-// Set encoded route
+// Set encode route
 const encodeRoute = require('./routes/encode.js')
 app.use('/encode', encodeRoute)
+
+// Set decode route
+const decodeRoute = require('./routes/decode.js')
+app.use('/decode', decodeRoute)
 
 // Start server
 const port = process.env.PORT || 3000
