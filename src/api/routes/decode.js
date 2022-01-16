@@ -20,6 +20,11 @@ router.get('/', (req, res) => {
             return res.status(400).send({ error: "The 'url' value is required in body." })
         }
 
+        // If invalid link format
+        if(!req.body.url.includes("https://short.link/")) {
+            return res.status(400).send({ error: "Url format is not valid." })
+        }
+
         const shortLinkSplit = req.body.url.split("https://short.link/") // Separate link in two parts
         const linkId = shortLinkSplit[1]; // Get id from link
         const dbId = hashids.decode(linkId); // Decode link id into id from database
