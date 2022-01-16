@@ -15,6 +15,12 @@ router.post('/', (req, res) => {
             return res.status(500).send({ error: error });
         }
 
+        // If url is not informed
+        if(req.body.url == null) {
+            return res.status(400).send({ error: "The 'url' value is required in body." })
+        }
+
+        // Add new url to table
         conn.query(
             'INSERT INTO urls (url) VALUES (?)',
             [req.body.url],

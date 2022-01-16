@@ -20,6 +20,7 @@ pool.getConnection(((error, conn) => {
             url varchar(255) not null
         )
     `, (err, results, fields) => {
+        conn.release()
         if (err) {
             console.log(err.message);
         }
